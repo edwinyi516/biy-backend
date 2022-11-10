@@ -8,8 +8,8 @@ from playhouse.shortcuts import model_to_dict
 
 user = Blueprint('users', 'user')
 
-@user.route('/register', methods = ["POST"])
-def register():
+@user.route('/signup', methods = ["POST"])
+def signup():
     payload = request.get_json()
     payload['email'] = payload['email'].lower()
     try:

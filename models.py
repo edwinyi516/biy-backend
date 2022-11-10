@@ -1,7 +1,9 @@
+import os
 from peewee import *
 from flask_login import UserMixin
+from playhouse.db_url import connect
 
-DATABASE = SqliteDatabase("biy.sqlite")
+DATABASE = connect(os.environ.get('DATABASE_URL') or 'sqlite:///biy.sqlite')
 
 class User(UserMixin, Model):
     email = CharField(unique = True)
