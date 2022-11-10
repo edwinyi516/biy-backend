@@ -15,7 +15,7 @@ def signup():
     try:
         #find if user already exists
         models.User.get(models.User.email == payload['email'])
-        return jsonify(data = {}, status = {"code": 401, "message": "User already exists"})
+        return jsonify(data = {}, status = {"code": 401, "message": "User already exists"}), 401
     except models.DoesNotExist:
         payload['password'] = generate_password_hash(payload['password'])
         user = models.User.create(**payload)
@@ -35,16 +35,16 @@ def login():
             del user_dict['password']
             login_user(user)
             print(user, "Logging in this user")
-            return jsonify(data = user_dict, status = {"code": 200, "message": "Success"})
+            return jsonify(data = user_dict, status = {"code": 200, "message": "Success"}), 200
         else:
-            return jsonify(data = {}, status = {"code": 401, "message": "Username or password is incorrect"})
+            return jsonify(data = {}, status = {"code": 401, "message": "Username or password is incorrect"}), 401
     except models.DoesNotExist:
-        return jsonify(data = {}, status = {"code": 401, "message": "Username or password is incorrect"})
+        return jsonify(data = {}, status = {"code": 401, "message": "Username or password is incorrect"}), 401
 
 @user.route('/logout', methods = ["GET"])
 def logout():
     logout_user()
-    return jsonify(data = {}, status = 200, message = "Logout successful")
+    return jsonify(data = {}, status = 200, message = "Logout successful"), 200
 
 #Logged in user test route
 @user.route('loggedinuser', methods = ["GET"])
