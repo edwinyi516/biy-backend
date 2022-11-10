@@ -47,7 +47,7 @@ def logout():
     return jsonify(data = {}, status = 200, message = "Logout successful"), 200
 
 #Logged in user test route
-@user.route('loggedinuser', methods = ["GET"])
+@user.route('/currentuser', methods = ["GET"])
 def getloggedinuser():
     print(current_user)
     print(type(current_user))
