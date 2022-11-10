@@ -23,7 +23,7 @@ def signup():
         print(user_dict)
         print(type(user_dict))
         del user_dict['password']
-        return jsonify(data = user_dict, status = {"code": 201, "message": "Success"})
+        return jsonify(data = user_dict, status = {"code": 201, "message": "Success"}), 201
 
 @user.route('/login', methods = ["POST"])
 def login():

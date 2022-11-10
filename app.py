@@ -8,7 +8,7 @@ import models
 from resources.user import user
 
 from flask_cors import CORS
-CORS(user, origins = ['http://localhost:3000'], supports_credentials = True)
+CORS(user, origins = ['https://www.biy.app/', 'http://localhost:3000'], supports_credentials = True)
 
 load_dotenv()
 DEBUG = True
