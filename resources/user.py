@@ -37,9 +37,9 @@ def login():
             print(user, "Logging in this user")
             return jsonify(data = user_dict, status = {"code": 200, "message": "Success"}), 200
         else:
-            return jsonify(data = {}, status = {"code": 401, "message": "Username or password is incorrect"}), 401
+            return jsonify(data = {}, status = {"code": 401, "message": "Email or password is incorrect"}), 401
     except models.DoesNotExist:
-        return jsonify(data = {}, status = {"code": 401, "message": "Username or password is incorrect"}), 401
+        return jsonify(data = {}, status = {"code": 401, "message": "Email or password is incorrect"}), 401
 
 @user.route('/logout', methods = ["GET"])
 def logout():
