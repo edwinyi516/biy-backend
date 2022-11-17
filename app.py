@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, after_this_request
-from flask_login import LoginManager
+from flask_login import LoginManager, UserMixin
 from dotenv import load_dotenv
 import os
 

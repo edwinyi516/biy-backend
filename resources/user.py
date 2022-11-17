@@ -2,7 +2,7 @@ import models
 
 from flask import request, jsonify, Blueprint
 from flask_bcrypt import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, current_user
+from flask_login import UserMixin, login_user, logout_user, login_required, current_user
 
 from playhouse.shortcuts import model_to_dict
 
@@ -28,12 +28,14 @@ def signup():
 @user.route('/login', methods = ["POST"])
 def login():
     payload = request.get_json()
+    remember_checked = payload['remember']
+    print(remember_checked)
     try:
         user = models.User.get(models.User.email == payload['email'].lower())
         user_dict = model_to_dict(user)
         if (check_password_hash(user_dict['password'], payload['password'])):
             del user_dict['password']
-            login_user(user)
+            login_user(user, remember = remember_checked)
             print(user, "Logging in this user")
             return jsonify(data = user_dict, status = {"code": 200, "message": "Success"}), 200
         else:
