@@ -15,7 +15,7 @@ class User(UserMixin, Model):
         database = DATABASE
 
 class Layout(Model):
-    user = ForeignKeyField(User, backref = 'id')
+    user = ForeignKeyField(User, backref = 'layouts')
     layout_data = CharField()
 
     class Meta:
