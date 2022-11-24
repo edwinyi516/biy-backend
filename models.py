@@ -14,8 +14,15 @@ class User(UserMixin, Model):
     class Meta:
         database = DATABASE
 
+class Layout(Model):
+    user = ForeignKeyField(User, backref = 'id')
+    layout_data = CharField()
+
+    class Meta:
+        database = DATABASE
+
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User], safe = True)
+    DATABASE.create_tables([User, Layout], safe = True)
     print("Connected to DB and created tables if they don't already exist")
     DATABASE.close()

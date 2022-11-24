@@ -1,14 +1,16 @@
 from flask import Flask, jsonify, after_this_request
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager
 from dotenv import load_dotenv
 import os
 
 import models
 
 from resources.user import user
+from resources.layout import layout
 
 from flask_cors import CORS
 CORS(user, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
+CORS(layout, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 
 load_dotenv()
 DEBUG = True
@@ -17,6 +19,14 @@ PORT = os.environ.get("PORT")
 app = Flask(__name__)
 app.secret_key = os.environ.get("APP_SECRET")
 app.register_blueprint(user, url_prefix = '/user')
+app.register_blueprint(layout, url_prefix = '/layout')
+
+# FOR DEPLOYMENT ONLY
+# app.config.update(
+#     SESSION_COOKIE_SECURE=True,
+#     SESSION_COOKIE_HTTPONLY=True,
+#     SESSION_COOKIE_SAMESITE='None',
+# )
 
 @app.before_request
 def before_request():
