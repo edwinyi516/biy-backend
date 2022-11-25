@@ -21,10 +21,10 @@ def new_layout():
 @layout.route('/update', methods = ['PUT'])
 def update_layout():
     payload = request.get_json()
-    query = models.Dog.update(**payload).where(models.Layout.user == current_user.id)
+    query = models.Layout.update(**payload).where(models.Layout.user == current_user.id)
     query.execute()
     return jsonify(
-        data = model_to_dict(models.Layout.get(models.Layout.user) == current_user.id),
+        data = model_to_dict(models.Layout.get(models.Layout.user == current_user.id)),
         status = 200,
         message = 'Layout successfully updated'
     ), 200
