@@ -25,8 +25,19 @@ class Category(Model):
     user = ForeignKeyField(User, backref = 'category')
     name = CharField()
 
+    class Meta:
+        database = DATABASE
+
+class Expense(Model):
+    user = ForeignKeyField(User, backref = 'expense')
+    category = ForeignKeyField(Category, backref = 'expense')
+    recurring = BooleanField()
+    fixed = BooleanField()
+    frequency = CharField()
+    amount = IntegerField()
+
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User, Layout], safe = True)
+    DATABASE.create_tables([User, Layout, Category, Expense], safe = True)
     print("Connected to DB and created tables if they don't already exist")
     DATABASE.close()
