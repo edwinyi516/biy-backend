@@ -9,6 +9,7 @@ from resources.user import user
 from resources.layout import layout
 from resources.category import category
 from resources.expense import expense
+from resources.income import income
 
 load_dotenv()
 DEBUG = True
@@ -30,11 +31,14 @@ CORS(user, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_
 CORS(layout, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 CORS(category, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 CORS(expense, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
+CORS(income, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 
 app.register_blueprint(user, url_prefix = '/user')
 app.register_blueprint(layout, url_prefix = '/layout')
 app.register_blueprint(category, url_prefix = '/category')
 app.register_blueprint(expense, url_prefix = '/expense')
+app.register_blueprint(income, url_prefix = '/income')
+
 
 # CHECK FOR DEPLOYMENT
 # app.config.update(

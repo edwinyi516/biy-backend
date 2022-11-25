@@ -24,6 +24,7 @@ class Layout(Model):
 class Category(Model):
     user = ForeignKeyField(User, backref = 'category')
     name = CharField()
+    type = CharField()
 
     class Meta:
         database = DATABASE
@@ -34,10 +35,25 @@ class Expense(Model):
     recurring = BooleanField()
     fixed = BooleanField()
     frequency = CharField()
+    due_date = DateField()
     amount = IntegerField()
+
+    class Meta:
+        database = DATABASE
+
+class Income(Model):
+    user = ForeignKeyField(User, backref = 'income')
+    category = ForeignKeyField(Category, backref = 'income')
+    recurring = BooleanField()
+    fixed = BooleanField()
+    frequency = CharField()
+    amount = IntegerField()
+
+    class Meta:
+        database = DATABASE
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User, Layout, Category, Expense], safe = True)
+    DATABASE.create_tables([User, Layout, Category, Expense, Income], safe = True)
     print("Connected to DB and created tables if they don't already exist")
     DATABASE.close()
