@@ -21,6 +21,10 @@ class Layout(Model):
     class Meta:
         database = DATABASE
 
+class Category(Model):
+    user = ForeignKeyField(User, backref = 'category')
+    name = CharField()
+
 def initialize():
     DATABASE.connect()
     DATABASE.create_tables([User, Layout], safe = True)
