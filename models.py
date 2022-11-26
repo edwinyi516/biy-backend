@@ -25,6 +25,9 @@ class Module(Model):
     user = ForeignKeyField(User, backref = 'module')
     i_value = CharField()
     category = CharField()
+    transactiontype = CharField(default = "")
+    interval = CharField(default = "")
+    frequency = CharField(default = "")
 
     class Meta:
         database = DATABASE
