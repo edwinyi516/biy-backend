@@ -21,6 +21,14 @@ class Layout(Model):
     class Meta:
         database = DATABASE
 
+class Module(Model):
+    user = ForeignKeyField(User, backref = 'module')
+    i_value = CharField()
+    category = CharField()
+
+    class Meta:
+        database = DATABASE
+
 class Category(Model):
     user = ForeignKeyField(User, backref = 'category')
     name = CharField()
@@ -54,6 +62,6 @@ class Income(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User, Layout, Category, Expense, Income], safe = True)
+    DATABASE.create_tables([User, Layout, Module, Category, Expense, Income], safe = True)
     print("Connected to DB and created tables if they don't already exist")
     DATABASE.close()
