@@ -41,11 +41,11 @@ app.register_blueprint(income, url_prefix = '/income')
 
 
 # CHECK FOR DEPLOYMENT
-# app.config.update(
-#     SESSION_COOKIE_SECURE=True,
-#     SESSION_COOKIE_HTTPONLY=True,
-#     SESSION_COOKIE_SAMESITE='None',
-# )
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='None',
+)
 
 @app.before_request
 def before_request():
