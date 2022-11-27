@@ -15,7 +15,7 @@ class User(UserMixin, Model):
         database = DATABASE
 
 class Layout(Model):
-    user = ForeignKeyField(User, backref = 'layouts')
+    user = ForeignKeyField(User, backref = 'layout')
     layout_data = CharField()
 
     class Meta:
@@ -25,9 +25,9 @@ class Module(Model):
     user = ForeignKeyField(User, backref = 'module')
     i_value = CharField()
     category = CharField()
-    transactiontype = CharField(default = "")
-    interval = CharField(default = "")
-    frequency = CharField(default = "")
+    transactiontype = CharField()
+    interval = CharField()
+    frequency = CharField()
 
     class Meta:
         database = DATABASE
@@ -63,8 +63,18 @@ class Income(Model):
     class Meta:
         database = DATABASE
 
+class Bill(Model):
+    user = ForeignKeyField(User, backref = 'bill')
+    paid = BooleanField()
+    recurring = BooleanField()
+    frequency = CharField()
+    due_date = DateField()
+
+    class Meta:
+        database = DATABASE
+
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User, Layout, Module, Category, Expense, Income], safe = True)
+    DATABASE.create_tables([User, Layout, Module, Category, Expense, Income, Bill], safe = True)
     print("Connected to DB and created tables if they don't already exist")
     DATABASE.close()

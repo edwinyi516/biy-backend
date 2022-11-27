@@ -11,6 +11,7 @@ from resources.category import category
 from resources.expense import expense
 from resources.income import income
 from resources.module import module
+from resources.bill import bill
 
 load_dotenv()
 DEBUG = True
@@ -34,6 +35,7 @@ CORS(module, origins = ['https://www.biy.app', 'http://localhost:3000'], support
 CORS(category, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 CORS(expense, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 CORS(income, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
+CORS(bill, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 
 app.register_blueprint(user, url_prefix = '/user')
 app.register_blueprint(layout, url_prefix = '/layout')
@@ -41,6 +43,7 @@ app.register_blueprint(module, url_prefix = '/module')
 app.register_blueprint(category, url_prefix = '/category')
 app.register_blueprint(expense, url_prefix = '/expense')
 app.register_blueprint(income, url_prefix = '/income')
+app.register_blueprint(bill, url_prefix = '/bill')
 
 # CHECK FOR DEPLOYMENT
 # app.config.update(
@@ -67,5 +70,5 @@ if __name__ == '__main__':
     app.run(debug = DEBUG, port = PORT)
 
 if os.environ.get('FLASK_ENV') != 'development':
-    print('\ non heroku!')
+    print('\ on heroku!')
     models.initialize()
