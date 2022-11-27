@@ -73,8 +73,18 @@ class Bill(Model):
     class Meta:
         database = DATABASE
 
+class Goal(Model):
+    user = ForeignKeyField(User, backref = 'goal')
+    name = CharField()
+    amount = IntegerField()
+    percentage_completed = IntegerField()
+
+    class Meta:
+        database = DATABASE
+
+
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User, Layout, Module, Category, Expense, Income, Bill], safe = True)
+    DATABASE.create_tables([User, Layout, Module, Category, Expense, Income, Bill, Goal], safe = True)
     print("Connected to DB and created tables if they don't already exist")
     DATABASE.close()

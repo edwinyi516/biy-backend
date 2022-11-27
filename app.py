@@ -12,6 +12,7 @@ from resources.expense import expense
 from resources.income import income
 from resources.module import module
 from resources.bill import bill
+from resources.goal import goal
 
 load_dotenv()
 DEBUG = True
@@ -36,6 +37,7 @@ CORS(category, origins = ['https://www.biy.app', 'http://localhost:3000'], suppo
 CORS(expense, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 CORS(income, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 CORS(bill, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
+CORS(goal, origins = ['https://www.biy.app', 'http://localhost:3000'], supports_credentials = True)
 
 app.register_blueprint(user, url_prefix = '/user')
 app.register_blueprint(layout, url_prefix = '/layout')
@@ -44,6 +46,7 @@ app.register_blueprint(category, url_prefix = '/category')
 app.register_blueprint(expense, url_prefix = '/expense')
 app.register_blueprint(income, url_prefix = '/income')
 app.register_blueprint(bill, url_prefix = '/bill')
+app.register_blueprint(goal, url_prefix = '/goal')
 
 # CHECK FOR DEPLOYMENT
 # app.config.update(
