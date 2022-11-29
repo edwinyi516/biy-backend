@@ -15,14 +15,14 @@ class User(UserMixin, Model):
         database = DATABASE
 
 class Layout(Model):
-    user = ForeignKeyField(User, backref = 'layout')
+    user = ForeignKeyField(User, backref = 'layouts')
     layout_data = CharField()
 
     class Meta:
         database = DATABASE
 
 class Module(Model):
-    user = ForeignKeyField(User, backref = 'module')
+    user = ForeignKeyField(User, backref = 'modules')
     i_value = CharField()
     category = CharField()
     transactiontype = CharField()
@@ -32,39 +32,28 @@ class Module(Model):
     class Meta:
         database = DATABASE
 
-class Category(Model):
-    user = ForeignKeyField(User, backref = 'category')
-    name = CharField()
-    type = CharField()
-
-    class Meta:
-        database = DATABASE
-
 class Expense(Model):
-    user = ForeignKeyField(User, backref = 'expense')
-    category = ForeignKeyField(Category, backref = 'expense')
+    user = ForeignKeyField(User, backref = 'expenses')
     recurring = BooleanField()
-    fixed = BooleanField()
     frequency = CharField()
-    due_date = DateField()
+    date = DateField()
     amount = IntegerField()
 
     class Meta:
         database = DATABASE
 
 class Income(Model):
-    user = ForeignKeyField(User, backref = 'income')
-    category = ForeignKeyField(Category, backref = 'income')
+    user = ForeignKeyField(User, backref = 'incomes')
     recurring = BooleanField()
-    fixed = BooleanField()
     frequency = CharField()
+    date = DateField()
     amount = IntegerField()
 
     class Meta:
         database = DATABASE
 
 class Bill(Model):
-    user = ForeignKeyField(User, backref = 'bill')
+    user = ForeignKeyField(User, backref = 'bills')
     paid = BooleanField()
     recurring = BooleanField()
     frequency = CharField()
@@ -74,7 +63,7 @@ class Bill(Model):
         database = DATABASE
 
 class Goal(Model):
-    user = ForeignKeyField(User, backref = 'goal')
+    user = ForeignKeyField(User, backref = 'goals')
     name = CharField()
     amount = IntegerField()
     percentage_completed = IntegerField()
@@ -85,6 +74,6 @@ class Goal(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User, Layout, Module, Category, Expense, Income, Bill, Goal], safe = True)
+    DATABASE.create_tables([User, Layout, Module, Expense, Income, Bill, Goal], safe = True)
     print("Connected to DB and created tables if they don't already exist")
     DATABASE.close()

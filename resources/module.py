@@ -11,7 +11,11 @@ module = Blueprint('modules', 'module')
 def new_module():
     payload = request.get_json()
     new_module = models.Module.create(**payload)
+    print("NEW MODULE BEFORE DICT")
+    print(new_module)
     module_dict = model_to_dict(new_module)
+    print("NEW MODEL AFTER DICT")
+    print(module_dict)
     return jsonify(
         data = module_dict,
         message = 'New module created',
@@ -29,13 +33,11 @@ def delete_module():
         status = 200
     ), 200
 
-@module.route('/')
+@module.route('/', methods = ['GET'])
 def get_module():
-    payload = request.get_json()
-    module = models.Module.get((models.Module.user == current_user.id) and (models.Module.i_value == payload['i_value']))
-    print(module)
+    current_user_modules = [model_to_dict(module) for module in current_user.modules]
     return jsonify(
-        data = model_to_dict(module),
+        data = current_user_modules,
         message = 'Success',
         status = 200
     ), 200

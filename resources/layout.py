@@ -21,6 +21,8 @@ def new_layout():
 @layout.route('/update', methods = ['PUT'])
 def update_layout():
     payload = request.get_json()
+    print('Receiving from front end')
+    print(payload)
     query = models.Layout.update(**payload).where(models.Layout.user == current_user.id)
     query.execute()
     return jsonify(
