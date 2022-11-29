@@ -46,11 +46,11 @@ app.register_blueprint(bill, url_prefix = '/bill')
 app.register_blueprint(goal, url_prefix = '/goal')
 
 # CHECK FOR DEPLOYMENT
-# app.config.update(
-#     SESSION_COOKIE_SECURE=True,
-#     SESSION_COOKIE_HTTPONLY=True,
-#     SESSION_COOKIE_SAMESITE='None',
-# )
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='None',
+)
 
 @app.before_request
 def before_request():
